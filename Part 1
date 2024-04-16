@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 16 15:56:22 2024
+
+@author: osahon
+"""
+
+import math
+import numpy as np
+from sympy import symbols, Eq, solve
+#from sympy.abc import *
+W1, C1, C_theta1, C_theta2 = symbols('W1 C1 C_theta1 C_theta2')
+
+# Equations
+a1 = np.deg2rad()
+b1 = np.deg2rad()
+WR = 
+eq1 = Eq(W1*np.sin(b1) + WR, C1*np.sin(a1))
+eq2 = Eq(W1*np.cos(b1), C1*np.cos(a1))
+eq3 = Eq(C_theta1, C1*np.sin(a1))
+eq4 = Eq(C_theta2, 0)
+
+solution = solve((eq1, eq2, eq3, eq4), (W1, C1, C_theta1, C_theta2))
+
+# Print the solution
+print(solution)
