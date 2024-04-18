@@ -66,9 +66,7 @@ P6 = 101325
 T_t6 = T_t5
 P_t6 = P_t5
 M6 = ((2/(gamma_T - 1))*((P6/Pt6)**((gamma_T - 1) / gamma_T) -1))**0.5
-# M6_eq = Eq(P6, (P_t6*(1+(0.5*(gamma_T - 1)*M6**2)))**(-gamma_T / (gamma_T-1)))
 c6 = M6*(gamma_T*287*T_t6)
-
 
 # Solve for mass flow after the turbine (but its the same everywhere)
 M_4 = 1 # for choked NGV
@@ -77,12 +75,12 @@ DM_5 = DM_4 # conserved along the turbine (I believe)
 m = (DM_5 * A_T * P_t5 * (gamma_T)**(1/2))/(R*T_t5)**(1/2)
 print("Mass flow = ", m, " kg/s")
 
-# STEP 6
-A_6 = 0.0013283844 # [m^2] measured; converted from 2.059 in^2
-A_4 = 0.001 # [m^2] measured (DUMMY VALUE TIL WE CALCULATE)
-# Solve for Mach number at nozzle exit
-M_6 = symbols('M_6')
-f_M = Eq(A_6/A_4, 1/M_6*(2/(gamma_T+1)*(1 + (gamma_T-1)/2 * M_6**2))**(1/2 * (gamma_T-1)/(gamma_T+1)))
-solution = solve((f_M), (M_6))
-print(solution)
-print("TEst")
+# # STEP 6
+# A_6 = 0.0013283844 # [m^2] measured; converted from 2.059 in^2
+# A_4 = 0.001 # [m^2] measured (DUMMY VALUE TIL WE CALCULATE)
+# # Solve for Mach number at nozzle exit
+# M_6 = symbols('M_6')
+# f_M = Eq(A_6/A_4, 1/M_6*(2/(gamma_T+1)*(1 + (gamma_T-1)/2 * M_6**2))**(1/2 * (gamma_T-1)/(gamma_T+1)))
+# solution = solve((f_M), (M_6))
+# print(solution)
+# print("TEst")
