@@ -9,7 +9,7 @@ T_t5 = 953.15 # 680 + 273.15
 c_pC = 1004.5
 c_pT = 1243.67
 shaft_pow = W_Turb() #From Part 1
-h_f = 42 * 10**6 # [J/kg] Placeholder (Kerosine)
+h_f = 42 * 10**6 # [J/kg]  (Kerosine)
 gamma_C = 1.4
 gamma_T = 1.3
 
@@ -40,7 +40,11 @@ print("f Analytical = ", f)
 print("T_t3 Analytical = ", T_t3, " K")
 
 # Solving for Compressor pressure ratio
+<<<<<<< HEAD
 eta_C = 0.5 # WE SET THIS (burner value for now)
+=======
+eta_C = 0.1 # WE SET THIS (burner value for now)
+>>>>>>> eff2d753570a29cdf1c69d6d9a1288734e102604
 comp_ratio = (eta_C*(T_t3/T_t2 - 1) + 1)**(gamma_C/(gamma_C-1))
 print("Compression Ratio = ", comp_ratio, " assuming eta_C = ", eta_C)
 
