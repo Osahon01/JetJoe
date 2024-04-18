@@ -8,7 +8,7 @@ T_t2 = 300
 T_t5 = 953.15
 c_pC = 1004.5
 c_pT = 1244
-shaft_pow = 848538.165060560 #From Part 1
+shaft_pow = W_Turb() #From Part 1
 h_f = 42 * 10**6 # Placeholder
 
 # Equations
