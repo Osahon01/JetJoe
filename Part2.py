@@ -40,11 +40,7 @@ print("f Analytical = ", f)
 print("T_t3 Analytical = ", T_t3, " K")
 
 # Solving for Compressor pressure ratio
-<<<<<<< HEAD
-eta_C = 0.5 # WE SET THIS (burner value for now)
-=======
 eta_C = 0.1 # WE SET THIS (burner value for now)
->>>>>>> eff2d753570a29cdf1c69d6d9a1288734e102604
 comp_ratio = (eta_C*(T_t3/T_t2 - 1) + 1)**(gamma_C/(gamma_C-1))
 print("Compression Ratio = ", comp_ratio, " assuming eta_C = ", eta_C)
 
