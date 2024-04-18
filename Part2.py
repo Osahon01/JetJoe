@@ -1,15 +1,21 @@
-from Part1 import TurbineWork_glob
-# from Part_1 import TurbineWork_glob()
-import math
+
 import numpy as np
 from sympy import symbols, Eq, solve
-#from sympy.abc import *
-f, Tt3 = symbols('f, Tt3')
+f, T_t3, T_t4 = symbols('f, T_t3, T_t4')
+
+#Known Variables#
+T_t2 = 300
+T_t5 = 953.15
+c_pC = 1004.5
+c_pT = 1244
+shaft_pow = 848538.165060560 #From Part 1
+h_f = 100 # Placeholder
 
 # Equations
-a1 = np.deg2rad(35.26)
-b1 = np.deg2rad(19)
-Omega = 4398.2316
-r1 = 0.0393760598
-TurbineWork_glob()
-# W_t = W_Turb()
+eq1 = Eq((1+f) * c_pT * (T_t4-T_t5), c_pC * (T_t3-T_t2))
+eq2 = Eq((1+f) * c_pT * T_t4, f*h_f + c_pC*T_t3)
+eq3 = Eq(shaft_pow/c_pT, T_t4-T_t5)
+
+#Solve
+solution = solve((eq1, eq2, eq3), (f, T_t3, T_t4))
+print(solution)
