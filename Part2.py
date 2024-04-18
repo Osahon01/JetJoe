@@ -65,8 +65,9 @@ P_t5 = P_t4*((T_t5/T_t4 - 1)/eta_T + 1)**(gamma_T/(gamma_T-1))
 P6 = 101325
 T_t6 = T_t5
 P_t6 = P_t5
-M6 = ((2/(gamma_T - 1))*((P6/Pt6)**((gamma_T - 1) / gamma_T) -1))**0.5
+M6 = ((2/(gamma_T - 1))*((P6/P_t6)**((gamma_T - 1) / gamma_T) -1))**0.5
 c6 = M6*(gamma_T*287*T_t6)
+print('here', c6, M6)
 
 # Solve for mass flow after the turbine (but its the same everywhere)
 M_4 = 1 # for choked NGV
