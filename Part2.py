@@ -40,7 +40,7 @@ print("f Analytical = ", f)
 print("T_t3 Analytical = ", T_t3, " K")
 
 # Solving for Compressor pressure ratio
-eta_C = 0.1 # WE SET THIS (burner value for now)
+eta_C = 0.5 # WE SET THIS (burner value for now)
 comp_ratio = (eta_C*(T_t3/T_t2 - 1) + 1)**(gamma_C/(gamma_C-1))
 print("Compression Ratio = ", comp_ratio, " assuming eta_C = ", eta_C)
 
@@ -52,7 +52,7 @@ print("T_t4 Analytical = ", T_t4, " K")
 
 # Knowns
 R = 287
-eta_T = 0.8 # WE SET THIS
+eta_T = 0.5 # WE SET THIS
 A_T = 0.00258064 # [m^2] (measured) (DUMMY VALUE 4 in^2)
 P_0 = 101325 # [Pa] in atmosphere
 P_t0 = P_0
@@ -66,15 +66,22 @@ P6 = 101325
 T_t6 = T_t5
 P_t6 = P_t5
 M6 = ((2/(gamma_T - 1))*((P6/P_t6)**((gamma_T - 1) / gamma_T) -1))**0.5
-c6 = M6*(gamma_T*287*T_t6)
-print('here', c6, M6)
+c6 = M6*(gamma_T*287*T_t6)**0.5
+print(f'c6 here', c6, M6)
 
 # Solve for mass flow after the turbine (but its the same everywhere)
 M_4 = 1 # for choked NGV
 DM_4 = M_4/(1 + ((gamma_T-1)/2)*M_4**2)**(1/2 * (gamma_T+1)/(gamma_T-1)) # corrected mass flow per unit area
 DM_5 = DM_4 # conserved along the turbine (I believe)
 m = (DM_5 * A_T * P_t5 * (gamma_T)**(1/2))/(R*T_t5)**(1/2)
-print("Mass flow = ", m, " kg/s")
+KE = (0.5*m*c6**2) #STEP 6 --> verify on piazza
+print(f'Mass flow = {m} [kg/s] ; KE = {KE} []')
+
+#Step 7 
+T0 = 300
+TSFC = (f / (c6*(f+1)))
+T_spec = (f+1)*(c6 / ((gamma_C*287*T0)**0.5) )
+print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec}')
 
 # # STEP 6
 # A_6 = 0.0013283844 # [m^2] measured; converted from 2.059 in^2
@@ -85,3 +92,4 @@ print("Mass flow = ", m, " kg/s")
 # solution = solve((f_M), (M_6))
 # print(solution)
 # print("TEst")
+
