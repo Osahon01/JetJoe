@@ -40,11 +40,7 @@ print("f Analytical = ", f)
 print("T_t3 Analytical = ", T_t3, " K")
 
 # Solving for Compressor pressure ratio
-<<<<<<< HEAD
-eta_C = 0.5 # WE SET THIS (burner value for now)
-=======
 eta_C = 0.1 # WE SET THIS (burner value for now)
->>>>>>> eff2d753570a29cdf1c69d6d9a1288734e102604
 comp_ratio = (eta_C*(T_t3/T_t2 - 1) + 1)**(gamma_C/(gamma_C-1))
 print("Compression Ratio = ", comp_ratio, " assuming eta_C = ", eta_C)
 
@@ -56,8 +52,9 @@ print("T_t4 Analytical = ", T_t4, " K")
 
 # Knowns
 R = 287
-eta_T = 0.8 # WE SET THIS
-A_T = 0.00258064 # [m^2] (measured) (DUMMY VALUE 4 in^2)
+# eta_T = 0.8 # WE SET THIS
+# A_T = 0.00258064 # [m^2] (measured) (DUMMY VALUE 4 in^2)
+A_NGV = 0.001 # [m^2] (DUMMY VALUE)
 P_0 = 101325 # [Pa] in atmosphere
 P_t0 = P_0
 P_t2 = P_t0
@@ -65,13 +62,14 @@ P_t3 = comp_ratio * P_0
 P_t4 = P_t3 # assuming constant pressure combustion
 
 # Pressure after turbine as a function of thermal efficiency
-P_t5 = P_t4*((T_t5/T_t4 - 1)/eta_T + 1)**(gamma_T/(gamma_T-1))
+# P_t5 = P_t4*((T_t5/T_t4 - 1)/eta_T + 1)**(gamma_T/(gamma_T-1))
 
-# Solve for mass flow after the turbine (but its the same everywhere)
+# Solve for mass flow after the NGV (but its the same everywhere)
 M_4 = 1 # for choked NGV
 DM_4 = M_4/(1 + ((gamma_T-1)/2)*M_4**2)**(1/2 * (gamma_T+1)/(gamma_T-1)) # corrected mass flow per unit area
-DM_5 = DM_4 # conserved along the turbine (I believe)
-m = (DM_5 * A_T * P_t5 * (gamma_T)**(1/2))/(R*T_t5)**(1/2)
+m = (DM_4 * A_NGV * P_t4 * (gamma_T)**(1/2))/(R*T_t4)**(1/2)
+# DM_5 = DM_4 # conserved along the turbine (I believe)
+# m = (DM_5 * A_T * P_t5 * (gamma_T)**(1/2))/(R*T_t5)**(1/2)
 print("Mass flow = ", m, " kg/s")
 
 # STEP 6
