@@ -53,22 +53,36 @@ print("T_t4 Analytical = ", T_t4, " K")
 
 # Knowns
 R = 287
-# eta_T = 0.8 # WE SET THIS
-# A_T = 0.00258064 # [m^2] (measured) (DUMMY VALUE 4 in^2)
-A_NGV = 0.000698744409 # [m^2] measured
+eta_T = 0.5 # WE SET THIS
+A_T = 0.00258064 # [m^2] (measured) (DUMMY VALUE 4 in^2)
 P_0 = 101325 # [Pa] in atmosphere
 P_t0 = P_0
 P_t2 = P_t0
 P_t3 = comp_ratio * P_0
 P_t4 = P_t3 # assuming constant pressure combustion
 
-# Solve for mass flow after the NGV (but its the same everywhere)
+# Pressure after turbine as a function of thermal efficiency
+P_t5 = P_t4*((T_t5/T_t4 - 1)/eta_T + 1)**(gamma_T/(gamma_T-1))
+P6 = 101325
+T_t6 = T_t5
+P_t6 = P_t5
+M6 = ((2/(gamma_T - 1))*((P6/P_t6)**((gamma_T - 1) / gamma_T) -1))**0.5
+c6 = M6*(gamma_T*287*T_t6)**0.5
+print(f'c6 here', c6, M6)
+
+# Solve for mass flow after the turbine (but its the same everywhere)
 M_4 = 1 # for choked NGV
 DM_4 = M_4/(1 + ((gamma_T-1)/2)*M_4**2)**(1/2 * (gamma_T+1)/(gamma_T-1)) # corrected mass flow per unit area
-m = (DM_4 * A_NGV * P_t4 * (gamma_T)**(1/2))/(R*T_t4)**(1/2)
-# DM_5 = DM_4 # conserved along the turbine (I believe)
-# m = (DM_5 * A_T * P_t5 * (gamma_T)**(1/2))/(R*T_t5)**(1/2)
-print("Mass flow = ", m, " kg/s")
+DM_5 = DM_4 # conserved along the turbine (I believe)
+m = (DM_5 * A_T * P_t5 * (gamma_T)**(1/2))/(R*T_t5)**(1/2)
+KE = (0.5*m*c6**2) #STEP 6 --> verify on piazza
+print(f'Mass flow = {m} [kg/s] ; KE = {KE} []')
+
+#Step 7 
+T0 = 300
+TSFC = (f / (c6*(f+1)))
+T_spec = (f+1)*(c6 / ((gamma_C*287*T0)**0.5) )
+print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec}')
 
 # STEP 6
 # Knowns 
@@ -78,7 +92,7 @@ T_6 = 300
 # Pressure after turbine as a function of thermal efficiency
 P_t5 = P_t4*((T_t5/T_t4 - 1)/eta_T + 1)**(gamma_T/(gamma_T-1))
 P_t6 = P_t5
-M_6 = (2/(gamma_T-1)*(P_t6/P_6)**((gamma_T-1)/gamma_T))**(1/2)
+M_6 = (2/(gamma_T-1)*(P_t6/P_6)**((gamma_T)/gamma_T-1))**(1/2)
 a_6 = (gamma_T*R*T_6)**(1/2)
 c_6 = M_6 * a_6
 print("Mach number at nozzle exit = ", M_6)
@@ -91,3 +105,4 @@ print("Nozzle exit velocity = ", c_6)
 # solution = solve((f_M), (M_6))
 # print(solution)
 # print("TEst")
+
