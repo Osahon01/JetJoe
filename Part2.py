@@ -77,6 +77,15 @@ DM_5 = DM_4 # conserved along the turbine (I believe)
 m = (DM_5 * A_T * P_t5 * (gamma_T)**(1/2))/(R*T_t5)**(1/2)
 KE = (0.5*m*c6**2) #STEP 6 --> verify on piazza
 print(f'Mass flow = {m} [kg/s] ; KE = {KE} []')
+<<<<<<< HEAD
+=======
+
+#Step 7 
+T0 = 300
+TSFC = (f / (c6*(f+1)))
+T_spec = (f+1)*(c6 / ((gamma_C*287*T0)**0.5) )
+print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec}')
+>>>>>>> 70c2f7d545bd8863a16248bda0984180a650268a
 
 #Step 7 
 T0 = 300
