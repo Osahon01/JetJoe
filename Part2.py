@@ -59,11 +59,13 @@ m = (DM_4 * A_NGV * P_t4 * (gamma_T)**(1/2))/(R*T_t4)**(1/2)
 KE = (0.5*m*c6**2) #STEP 6 --> verify on piazza
 print(f'Mass flow = {m} [kg/s] ; KE = {KE} []')
 
-#Step 7 
-cfact = (36004.4448*(1/0.4536))
+# STEP 7
+T = m*c6
+print(f'Thrust = {T} [N]')
+cfact = (3600*4.4448*(1/0.4536)) # (kg/s)/N to (lbm/hr)/lbf
 T0 = 300
 TSFC = (f / (c6*(f+1)))
 TSFC_new = TSFC*cfact
 T_spec = (f+1)*(c6 / ((gamma_C*287*T0)**0.5) )
-print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec}')
-print(f'TSFC = {TSFC_new}')
+print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec} [N/kg]')
+print(f'TSFC Imperial = {TSFC_new}')
