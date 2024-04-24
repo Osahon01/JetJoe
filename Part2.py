@@ -74,8 +74,8 @@ print(f'Mass flow at inlet = {m1} [kg/s]')
 # SANITY CHECK
 T = m4*c6
 print(f'Thrust = {T} [N]')
-cfact = 1/4.482 * 1/60 * 16 # (lbm/N) * (min/hr)^-1 * oz/lbm
-fuel_cons = T * TSFC_new * cfact
+cfact2 = 1/4.482 * 1/60 * 16 # (lbm/N) * (min/hr)^-1 * oz/lbm
+fuel_cons = T * TSFC_new * cfact2
 print(f'Fuel consumption = {fuel_cons} [oz/min]')
 
 # DIRECT ASSESSMENT BASED ON MEASUREMENTS
