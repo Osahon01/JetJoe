@@ -46,10 +46,10 @@ T_6 = 300
 P6 = 101325
 T_t6 = T_t5
 P_t6 = P_t5
-M6 = ((2/(gamma_T - 1))*((P6/P_t6)**(-1*(gamma_T - 1) / gamma_T) -1))**0.5
+# M6 = ((2/(gamma_T - 1))*((P6/P_t6)**(-1*(gamma_T - 1) / gamma_T) -1))**0.5 --> double check; may be wrong
 c6 = (2*c_pT*T_t5*(1-(T_t4/T_t5)*((P_0/P_t3)**((gamma_T - 1)/gamma_T))))**0.5
 
-print("c6 = ", c6, " and M6 = ", M6)
+print("c6 = ", c6)
 
 # Solve for mass flow after the turbine (but its the same everywhere)
 A_NGV = 0.000698744409 # m^2
