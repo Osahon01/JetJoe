@@ -55,12 +55,12 @@ A_NGV = 0.000698744409 # m^2
 M_4 = 1 # for choked NGV
 DM_4 = M_4/(1 + ((gamma_T-1)/2)*M_4**2)**(1/2 * (gamma_T+1)/(gamma_T-1)) # corrected mass flow per unit area
 # DM_5 = DM_4 # conserved along the turbine (I believe)
-m = (DM_4 * A_NGV * P_t4 * (gamma_T)**(1/2))/(R*T_t4)**(1/2)
-KE = (0.5*m*c6**2) #STEP 6 --> verify on piazza
-print(f'Mass flow = {m} [kg/s] ; KE = {KE} []')
+m4 = (DM_4 * A_NGV * P_t4 * (gamma_T)**(1/2))/(R*T_t4)**(1/2)
+KE = (0.5*m4*c6**2) #STEP 6 --> verify on piazza
+print(f'NGV mass flow = {m4} [kg/s] ; KE_dot = {KE} [W = J/s]')
 
 # STEP 7
-T = m*c6
+T = m4*c6
 print(f'Thrust = {T} [N]')
 cfact = (3600*4.4448*(1/0.4536)) # (kg/s)/N to (lbm/hr)/lbf
 T0 = 300
@@ -69,3 +69,17 @@ TSFC_new = TSFC*cfact
 T_spec = (f+1)*(c6 / ((gamma_C*287*T0)**0.5) )
 print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec} [N/kg]')
 print(f'TSFC Imperial = {TSFC_new}')
+# Calculating Inlet Mass Flow
+m1 = m4/(1 + f)
+print(f'Mass flow at inlet = {m1} [kg/s]')
+
+# DIRECT ASSESSMENT BASED ON MEASUREMENTS
+# Values we measure
+A_1 = 0 # Inlet Area [m^2]
+T_0 = 0 # [K]
+P_0 = 0 # [Pa] Cell Pressure
+P_dynamic = 0 
+P_1 = P_0 - P_dynamic
+# Values we calculate
+#M_1 = (2/(gamma_C-1)*(STUFF))
+#m1 = A_1*P_0/(T_0)**0.5 * (gamma_C/R)**0.5 * M_1/((1 + (gamma_C-1)/2 * M_1**2)**((gamma_C+1)/2*(gamma_C-1)))
