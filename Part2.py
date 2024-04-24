@@ -33,7 +33,7 @@ print("T_t4 Analytical = ", T_t4, " K")
 
 # Knowns
 R = 287
-eta_T = 0.6 # WE SET THIS
+eta_T = 0.60 # WE SET THIS
 P_0 = 101325 # [Pa] in atmosphere
 P_t0 = P_0
 P_t2 = P_t0
@@ -60,18 +60,23 @@ KE = (0.5*m4*c6**2) #STEP 6 --> verify on piazza
 print(f'NGV mass flow = {m4} [kg/s] ; KE_dot = {KE} [W = J/s]')
 
 # STEP 7
-T = m4*c6
-print(f'Thrust = {T} [N]')
 cfact = (3600*4.4448*(1/0.4536)) # (kg/s)/N to (lbm/hr)/lbf
 T0 = 300
 TSFC = (f / (c6*(f+1)))
 TSFC_new = TSFC*cfact
 T_spec = (f+1)*(c6 / ((gamma_C*287*T0)**0.5) )
-print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec} [N/kg]')
+print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec}')
 print(f'TSFC Imperial = {TSFC_new}')
 # Calculating Inlet Mass Flow
 m1 = m4/(1 + f)
 print(f'Mass flow at inlet = {m1} [kg/s]')
+
+# SANITY CHECK
+T = m4*c6
+print(f'Thrust = {T} [N]')
+cfact = 1/4.482 * 1/60 * 16 # (lbm/N) * (min/hr)^-1 * oz/lbm
+fuel_cons = T * TSFC_new * cfact
+print(f'Fuel consumption = {fuel_cons} [oz/min]')
 
 # DIRECT ASSESSMENT BASED ON MEASUREMENTS
 # Values we measure
