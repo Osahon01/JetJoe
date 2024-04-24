@@ -17,7 +17,7 @@ a1 = np.deg2rad(35.26)
 b1 = -np.deg2rad(19)
 Omega = 160000 * (2*np.pi)/60 # Convert from RPM to rad/s
 print(Omega)
-r1 = 0.02293760598
+r1 = 0.02 #0.02293760598
 OmegaR1 = Omega*r1
 eq1 = Eq(W1*np.sin(b1) + OmegaR1, C1*np.sin(a1))
 eq2 = Eq(W1*np.cos(b1), C1*np.cos(a1))

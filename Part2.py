@@ -51,7 +51,7 @@ c6 = M6*(gamma_T*287*T_6)**0.5
 print("c6 = ", c6, " and M6 = ", M6)
 
 # Solve for mass flow after the turbine (but its the same everywhere)
-A_NGV = 0.000698744409 # m^2
+A_NGV = 0.002 #0.000698744409 # m^2
 M_4 = 1 # for choked NGV
 DM_4 = M_4/(1 + ((gamma_T-1)/2)*M_4**2)**(1/2 * (gamma_T+1)/(gamma_T-1)) # corrected mass flow per unit area
 # DM_5 = DM_4 # conserved along the turbine (I believe)
@@ -63,19 +63,20 @@ print(f'NGV mass flow = {m4} [kg/s] ; KE_dot = {KE} [W = J/s]')
 cfact = (3600*4.4448*(1/0.4536)) # (kg/s)/N to (lbm/hr)/lbf
 T0 = 300
 TSFC = (f / (c6*(f+1)))
-TSFC_new = TSFC*cfact
+TSFC_imperial = TSFC*cfact
 T_spec = (f+1)*(c6 / ((gamma_C*287*T0)**0.5) )
 print(f'TSFC = {TSFC} ; Specific Thrust = {T_spec}')
-print(f'TSFC Imperial = {TSFC_new}')
+print(f'TSFC Imperial = {TSFC_imperial}')
 # Calculating Inlet Mass Flow
 m1 = m4/(1 + f)
 print(f'Mass flow at inlet = {m1} [kg/s]')
 
 # SANITY CHECK
-T = m4*c6
-print(f'Thrust = {T} [N]')
+thrust = m4*c6
+thrust_lbs = thrust/4.4482
+print(f'Thrust = {thrust_lbs} [lbf]')
 cfact = 1/4.482 * 1/60 * 16 # (lbm/N) * (min/hr)^-1 * oz/lbm
-fuel_cons = T * TSFC_new * cfact
+fuel_cons = thrust * TSFC_imperial * cfact
 print(f'Fuel consumption = {fuel_cons} [oz/min]')
 
 # DIRECT ASSESSMENT BASED ON MEASUREMENTS
