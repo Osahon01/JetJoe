@@ -47,7 +47,8 @@ P6 = 101325
 T_t6 = T_t5
 P_t6 = P_t5
 M6 = ((2/(gamma_T - 1))*((P6/P_t6)**(-1*(gamma_T - 1) / gamma_T) -1))**0.5
-c6 = M6*(gamma_T*287*T_6)**0.5
+c6 = (2*c_pT*T_t5*(1-(T_t4/T_t5)*((P_0/P_t3)**((gamma_T - 1)/gamma_T))))**0.5
+
 print("c6 = ", c6, " and M6 = ", M6)
 
 # Solve for mass flow after the turbine (but its the same everywhere)
@@ -74,7 +75,7 @@ print(f'Mass flow at inlet = {m1} [kg/s]')
 # SANITY CHECK
 T = m4*c6
 print(f'Thrust = {T} [N]')
-cfact2 = 1/4.482 * 1/60 * 16 # (lbm/N) * (min/hr)^-1 * oz/lbm
+cfact2 = (1/4.482) * (1/60) * 16 # (lbm/N) * (min/hr)^-1 * oz/lbm
 fuel_cons = T * TSFC_new * cfact2
 print(f'Fuel consumption = {fuel_cons} [oz/min]')
 
