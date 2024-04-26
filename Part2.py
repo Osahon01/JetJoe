@@ -10,10 +10,12 @@ print("\nStep 1")
 # Known variables
 a1 = np.deg2rad(35.26)
 b1 = -np.deg2rad(19)
+# b2 = np.deg2rad(45) # Around Alex's group?
 Omega = 160000 * (2*np.pi)/60 # Convert from RPM to rad/s
 r1 = 0.02293760598
 OmegaR1 = Omega*r1
 w_T = OmegaR1**2 * 1/(1 - np.tan(b1)/np.tan(a1))
+# w_T = OmegaR1**2 * np.tan(a1)/np.tan(b2)
 print(f'w_T = {w_T} [J/kg]')
 
 # Step 2
@@ -40,7 +42,7 @@ print(f'f = {f}')
 print(f'T_t3  = {T_t3} K')
 
 # Calculating Compressor pressure ratio
-eta_C = 0.6 # WE SET THIS
+eta_C = 0.60 # WE SET THIS
 comp_ratio = (eta_C*(T_t3/T_t2 - 1) + 1)**(gamma_C/(gamma_C-1))
 print(f'Compression Ratio =  {comp_ratio}  assuming eta_C = {eta_C}')
 
@@ -56,7 +58,7 @@ print("\nStep 5")
 
 # Knowns
 R = 287
-eta_T = 0.60 # WE SET THIS
+eta_T = 0.80 # WE SET THIS
 P_0 = 101325 # [Pa] Atmospheric pressure at sea level
 P_t0 = P_0 # c_0 = 0 (atmosphere is initially at rest wrt inlet)
 P_t2 = P_t0 # Stagnation pressure conserved along streamline up to the compressor
@@ -65,14 +67,18 @@ P_t4 = P_t3 # Stagnation pressure conserved across the combustor
 
 # Pressure after turbine as a function of thermal efficiency
 P_t5 = P_t4*((T_t5/T_t4 - 1)/eta_T + 1)**(gamma_T/(gamma_T-1))
+# P_t5 = P_t4*((T_t5/T_t4))**(gamma_T/(gamma_T-1)) # If eta_T = 1
 T_6 = 300
 P6 = 101325
 T_t6 = T_t5
 P_t6 = P_t5
-M6 = ((2/(gamma_T - 1))*((P6/P_t6)**(-1*(gamma_T - 1) / gamma_T) -1))**0.5
+M6 = ((2/(gamma_T - 1))*((P_t6/P6)**((gamma_T - 1) / gamma_T) -1))**0.5
+T_exit = T_t6/(1+(gamma_T-1)/2 * M6**2)
+print(f'T_exit = {T_exit} K')
+a6 = (gamma_T * R * T_exit)**0.5
+# c6 = M6*a6
 c6 = (2*c_pT*T_t5*(1-(T_t4/T_t5)*((P_0/P_t3)**((gamma_T - 1)/gamma_T))))**0.5
-
-print(f'c6 = {c6} and M6 = {M6}')
+print(f'c6 = {c6} and M6 = {M6} and a6 = {a6}')
 
 # Solve for mass flow after the turbine (but its the same everywhere)
 A_NGV = 0.000698744409 # m^2 measured
