@@ -40,7 +40,7 @@ print(f'f = {f}')
 print(f'T_t3  = {T_t3} K')
 
 # Calculating Compressor pressure ratio
-eta_C = 0.6 # WE SET THIS
+eta_C = 0.63 # WE SET THIS
 comp_ratio = (eta_C*(T_t3/T_t2 - 1) + 1)**(gamma_C/(gamma_C-1))
 print(f'Compression Ratio =  {comp_ratio}  assuming eta_C = {eta_C}')
 
@@ -56,7 +56,7 @@ print("\nStep 5")
 
 # Knowns
 R = 287
-eta_T = 0.60 # WE SET THIS
+eta_T = 0.7 # WE SET THIS
 P_0 = 101325 # [Pa] Atmospheric pressure at sea level
 P_t0 = P_0 # c_0 = 0 (atmosphere is initially at rest wrt inlet)
 P_t2 = P_t0 # Stagnation pressure conserved along streamline up to the compressor
@@ -70,7 +70,8 @@ P6 = 101325
 T_t6 = T_t5
 P_t6 = P_t5
 M6 = ((2/(gamma_T - 1))*((P6/P_t6)**(-1*(gamma_T - 1) / gamma_T) -1))**0.5
-c6 = M6*((gamma_T*R*T_t6)**0.5) 
+T_V6 = T_t6 / (1+(gamma_T-1)/2 * M6**2)
+c6 = M6*((gamma_T*R*(T_V6))**0.5)
 # T_t5s = T_t5 + (c_pC/c_pT)*((T_t3 - T_t2) / (f+1))*(1 - (1 / (eta_C - (eta_T - eta_C))))
 # c6 = (2*c_pT*T_t5*(1-(T_t4/T_t5s)*((P_0/P_t3)**((gamma_T - 1)/gamma_T))))**0.5
 print(f'c6 = {c6} and M6 = {M6}')
