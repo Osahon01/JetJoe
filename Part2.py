@@ -114,13 +114,3 @@ cfact2 = (1/4.4482) * (1/60) * 16 # (lbf/N) * (min/hr)^-1 * oz/lbm
 fuel_cons = T * TSFC_imperial * cfact2
 print(f'Fuel consumption = {fuel_cons} [oz/min]')
 
-# DIRECT ASSESSMENT BASED ON MEASUREMENTS
-# Values we measure
-A_1 = 0 # Inlet Area [m^2]
-T_0 = 0 # [K]
-P_0 = 0 # [Pa] Cell Pressure
-P_dynamic = 0 
-P_1 = P_0 - P_dynamic
-# Values we calculate
-#M_1 = (2/(gamma_C-1)*(STUFF))
-#m1 = A_1*P_0/(T_0)**0.5 * (gamma_C/R)**0.5 * M_1/((1 + (gamma_C-1)/2 * M_1**2)**((gamma_C+1)/2*(gamma_C-1)))
