@@ -3,6 +3,7 @@ from DirectAssessment import DirectAssessment
 from Model import Model
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 # DIRECT AND THERMODYNAMIC ASSESSMENTS
 
@@ -64,3 +65,37 @@ for i in range(len(model_assessment)):
 print(model_assessment)
 
 # PLOT/TABULATE, COMPARE, AND INTERPRET
+
+# # Max RPM TSFC
+# 
+# ax1 = plt.figure()
+# plt.bar(x=[1,2,3], height=TSFCs, label=bar_label)
+# plt.title(f'')
+# plt.ylabel(f'TSFC [lbm/hr / kg]')
+# plt.show(block=True)
+
+bar_label = ["Model", "Direct \nAssessment", "Thermodynamic \nAssessment"]
+TSFCs = [model_assessment[3][4], direct_assessment[3][3], thermo_assessment[3][6]]
+spec_Ts = [model_assessment[3][3], direct_assessment[3][2], thermo_assessment[3][5]]
+
+# Creating the figure and subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))  # 1 row, 2 columns
+
+# First bar graph on the first axis
+ax1.bar(bar_label, TSFCs, color='b', label='TSFC')
+ax1.set_title(f'TSFC Comparison at Max RPM of {RPM[-1]}')
+ax1.set_xlabel('Model Comparison')
+ax1.set_ylabel(f'TSFC')
+ax1.legend()
+
+# Second bar graph on the second axis
+ax2.bar(bar_label, spec_Ts, color='r', label='$F\'/ma$')
+ax2.set_title(f'Specific Thrust Comparison at Max RPM of {RPM[-1]}')
+ax2.set_xlabel('Model Comparison')
+ax2.set_ylabel(f'Specific Thrust $F\'/ma$')
+ax2.legend()
+
+# Adjust layout to prevent overlap
+fig.tight_layout()
+
+plt.show()

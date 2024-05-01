@@ -1,4 +1,3 @@
-from Part1 import W_Turb
 import numpy as np
 
 # OUR MODEL 
@@ -122,4 +121,3 @@ class Model:
 
     def performance_bid(self):
         return np.array([self.comp_ratio, self.m1, self.Tt4, self.T_spec, self.TSFC_imperial])
-
