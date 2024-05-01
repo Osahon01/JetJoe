@@ -42,4 +42,3 @@ class ThermoAssessment:
         self.TSFC_imperial = self.TSFC * 3600*4.4448*(1/0.4536) # [(lbm/hr)/lbf] Imperial Specific Thrust
         print(f'\nThermo Analysis Estimated Parameters \nFuel Flow Fraction = {self.f} [-] \nAd. Compressor Efficiency = {self.eta_C} [-] \nTurbine Inlet Temp = {self.Tt4} [K] \nIsentropic Turbine Exit Temp = {self.Tt5s} [K] \nJet Velocity = {self.c6} [m/s] \nSpecific Thrust = {self.spec_T} [-] \nTSFC = {self.TSFC_imperial} [(lbm/hr)/lbf]')
         return np.array([self.f, self.eta_C, self.Tt4, self.Tt5s, self.c6, self.spec_T, self.TSFC_imperial])
-        
