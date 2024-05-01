@@ -45,8 +45,10 @@ for i in range(len(direct_assessment[0])):
     thermo_anal_trial = ThermoAssessment(P0[i], T0[i], Pt3[i], Tt3[i], Tt5[i], mf, m1, delta_eta)
     thermo_assessment[i] = thermo_anal_trial.get_est_parameters()
 
-print(direct_assessment)
-print(thermo_assessment)
+print('\nDirect Assessment Output Table')
+print(f'{np.array2string(direct_assessment, precision=4, floatmode="fixed")}')
+print('\nThermodynamic Assessment Output Table')
+print(f'{np.array2string(thermo_assessment, precision=4, floatmode="fixed")}')
 
 # MODEL PREDICTIONS for each RPM
 
@@ -62,7 +64,8 @@ for i in range(len(model_assessment)):
     model_anal_trial = Model(RPM[i], a1, b1, A_NGV)
     model_assessment[i] = model_anal_trial.performance_bid()
 
-print(model_assessment)
+print('\nModel Prediction Output Table')
+print(f'{np.array2string(model_assessment, precision=4, floatmode="fixed")}')
 
 # PLOT/TABULATE, COMPARE, AND INTERPRET
 
@@ -71,7 +74,7 @@ print(model_assessment)
 # ax1 = plt.figure()
 # plt.bar(x=[1,2,3], height=TSFCs, label=bar_label)
 # plt.title(f'')
-# plt.ylabel(f'TSFC [lbm/hr / kg]')
+# plt.ylabel(f'TSFC ')
 # plt.show(block=True)
 
 bar_label = ["Model", "Direct \nAssessment", "Thermodynamic \nAssessment"]
@@ -85,14 +88,14 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))  # 1 row, 2 columns
 ax1.bar(bar_label, TSFCs, color='b', label='TSFC')
 ax1.set_title(f'TSFC Comparison at Max RPM of {RPM[-1]}')
 ax1.set_xlabel('Model Comparison')
-ax1.set_ylabel(f'TSFC')
+ax1.set_ylabel(f'TSFC [lbm/hr / kg]')
 ax1.legend()
 
 # Second bar graph on the second axis
 ax2.bar(bar_label, spec_Ts, color='r', label='$F\'/ma$')
 ax2.set_title(f'Specific Thrust Comparison at Max RPM of {RPM[-1]}')
 ax2.set_xlabel('Model Comparison')
-ax2.set_ylabel(f'Specific Thrust $F\'/ma$')
+ax2.set_ylabel(f'Specific Thrust $F\'/ma$ [-]')
 ax2.legend()
 
 # Adjust layout to prevent overlap
