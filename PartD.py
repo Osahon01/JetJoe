@@ -18,7 +18,7 @@ RPM = [45200, 82900, 108100, 160000]
 P0 = [101973.5004, 101973.5004,	101973.5004,101973.5004] # [Pa] Cell Static Pressure
 T0 = [294.85, 294.95, 295.15, 296.15] # [K] Inlet Temperature
 F = [3.113755131, 12.89984268, 24.46521888, 64.94403558] # [N] Thrust
-A1 = np.pi * 0.0229**2 # Inlet Area [m^2]
+A1 = 0.004870958 # Inlet Area [m^2]
 P1_dynamic = [33.34456, 134.87128, 259.29128, 594.7276] # [Pa] Inlet Duct Wall Dynamic Pressure
 V = [0.15, 1.05, 1.41, 4.12] # [gal/hour] Fuel Flow
 
