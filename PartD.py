@@ -16,10 +16,10 @@ RPM = [45200, 82900, 108100, 160000]
 # [Trial 1 , Trial 2, Trial 3, Trial 4 (Max RPM)] 
 
 P0 = [101973.5004, 101973.5004,	101973.5004,101973.5004] # [Pa] Cell Static Pressure
-T0 = [294.85, 294.95, 295.15, 296.15] # [K] Inlet Temperature
+T0 = [294.85, 294.95, 295.15, 296.55] # [K] Inlet Temperature
 F = [3.113755131, 12.89984268, 24.46521888, 64.94403558] # [N] Thrust
-A1 = np.pi * 0.0229**2 # Inlet Area [m^2]
-P1_dynamic = [33.34456, 134.87128, 259.29128, 594.7276] # [Pa] Inlet Duct Wall Dynamic Pressure
+A1 = 0.004870958 # Inlet Area [m^2]
+P1_dynamic = [33.34456, 134.87128, 259.29128, 593.23456] # [Pa] Inlet Duct Wall Dynamic Pressure
 V = [0.15, 1.05, 1.41, 4.12] # [gal/hour] Fuel Flow
 
 # Thermodynamic Assessment Inputs from our Trials (Measured Paramaters)
@@ -27,8 +27,8 @@ V = [0.15, 1.05, 1.41, 4.12] # [gal/hour] Fuel Flow
 P0 = P0 # [Pa] Cell Static Pressure
 T0 = T0 # [K] Inlet Temperature
 Pt3 = [109626.684, 133068.868, 160647.908, 255106.12] # [Pa] Compressor Discharge Pressure
-Tt3 = [311.55, 311.35, 317.35, 378.05] # [K] Compressor Discharge Temperature
-Tt5 = [827.15, 819.15, 805.15, 1039.15] # [K] Exhaust Gas Temperature
+Tt3 = [311.55, 311.35, 317.35, 424.45] # [K] Compressor Discharge Temperature HIGH TEMPS FIX ISSUE
+Tt5 = [827.15, 819.15, 805.15, 1033.15] # [K] Exhaust Gas Temperature
 V = V # [gal/hour] Fuel Flow 
 F = F # [N] Thrust
 A1 = A1 # Inlet Area [m^2] 
@@ -79,22 +79,23 @@ print(f'{np.array2string(model_assessment, precision=4, floatmode="fixed")}')
 # plt.ylabel(f'TSFC ')
 # plt.show(block=True)
 
-bar_label = ["Model", "Direct \nAssessment", "Thermodynamic \nAssessment"]
-TSFCs = [model_assessment[3][4], direct_assessment[3][3], thermo_assessment[3][6]]
+TSFCs = [model_assessment[3][4], direct_assessment[3][3]] #, thermo_assessment[3][6]]
 spec_Ts = [model_assessment[3][3], direct_assessment[3][2], thermo_assessment[3][5]]
 
 # Creating the figure and subplots
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))  # 1 row, 2 columns
 
 # First bar graph on the first axis
-ax1.bar(bar_label, TSFCs, color='b', label='TSFC')
+bar_label1 = ["Model", "Direct \nAssessment"] #, "Thermodynamic \nAssessment"]
+ax1.bar(bar_label1, TSFCs, color='b', label='TSFC')
 ax1.set_title(f'TSFC Comparison at Max RPM of {RPM[-1]}')
 ax1.set_xlabel('Model Comparison')
 ax1.set_ylabel(f'TSFC [lbm/hr / kg]')
 ax1.legend()
 
 # Second bar graph on the second axis
-ax2.bar(bar_label, spec_Ts, color='r', label='$F\'/ma$')
+bar_label2 = ["Model", "Direct \nAssessment", "Thermodynamic \nAssessment"]
+ax2.bar(bar_label2, spec_Ts, color='r', label='$F\'/ma$')
 ax2.set_title(f'Specific Thrust Comparison at Max RPM of {RPM[-1]}')
 ax2.set_xlabel('Model Comparison')
 ax2.set_ylabel(f'Specific Thrust $F\'/ma$ [-]')

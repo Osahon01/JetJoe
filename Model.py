@@ -53,7 +53,7 @@ class Model:
         self.f = (-1*(cpT*Tt5+hf)+np.sqrt((cpT*Tt5+hf)**2 - 4*hf*(Tt2*cpC-cpT*Tt5)))/(2*hf)
         self.Tt3 = (1+self.f)*(self.w_T/cpC) + Tt2
         # print(f'f = {self.f}')
-        # print(f'Tt3  = {self.Tt3} K')
+        print(f'Tt3  = {self.Tt3} K')
 
         # Calculating Compressor pressure ratio
         self.comp_ratio = (eta_C*(self.Tt3/Tt2 - 1) + 1)**(gamma_C/(gamma_C-1))
@@ -64,7 +64,7 @@ class Model:
 
         # Calculate Turbine Inlet temp.
         self.Tt4 = (cpC*(self.Tt3-Tt2))/((1+self.f)*cpT) + Tt5
-        # print(f'Tt4 Analytical = {self.Tt4} K')
+        print(f'Tt4 Analytical = {self.Tt4} K')
 
         # Step 5
         # print("\nStep 5")
